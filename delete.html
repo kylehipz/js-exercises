@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<ul id="list">
+		<li>Hello</li>
+		<li>World</li>
+		<li>Javascript</li>
+		<li>Rocks</li>
+	</ul>
+	<button id="btn">Click me to delete</button>
+</body>
+<script>
+	const list = document.getElementById("list");
+	const btn = document.getElementById("btn");
+
+	btn.addEventListener("click", () => {
+		list.innerHTML = ""
+	});
+</script>
+</html>

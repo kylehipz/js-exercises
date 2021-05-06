@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<h2>Input an anime character</h2>
+	<form id="form">
+		<input type="text" id="inp">
+		<input type="submit" value="Submit">
+	</form>
+
+	<h1>Quotes from <span id="character"></span></h1>
+	<ul id="list">
+	</ul>
+</body>
+<script>
+	const form = document.getElementById("form");
+	const char = document.getElementById("character");
+
+	const baseURL = "https://animechan.vercel.app/api/quotes/character?";
+
+	function renderToList(quotes) {
+		console.log(quotes);
+		const list = document.getElementById("list");
+
+		quotes.map((quote) => {
+			const newElem = document.createElement("li");
+			newElem.innerHTML = quote.quote;
+
+			list.appendChild(newElem);
+		});
+	}
+
+	form.addEventListener("submit", (e) => {
+		const input = form.firstElementChild.value;
+		list.innerHTML = "";
+		char.innerHTML = input;
+
+		fetch(`${baseURL}name=${input}`)
+			.then((res) => res.json())
+			.then((quotes) => renderToList(quotes))
+			.catch((err) => console.log(err));
+		e.preventDefault();
+});
+</script>
+</html>
